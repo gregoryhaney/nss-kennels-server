@@ -32,12 +32,12 @@ def get_all_customers():
         # Write the SQL query to get the information you want
         db_cursor.execute("""
         SELECT
-            a.id,
-            a.name,
-            a.address,
-            a.email,
-            a.password
-        FROM customer a
+            c.id,
+            c.name,
+            c.address,
+            c.email,
+            c.password
+        FROM Customer c
         """)
 
         # Initialize an empty list to hold all customer representations
@@ -72,13 +72,13 @@ def get_single_customer(id):
         # into the SQL statement.
         db_cursor.execute("""
         SELECT
-            a.id,
-            a.name,
-            a.address,
-            a.email,
-            a.password
-        FROM customer a
-        WHERE a.id = ?
+            c.id,
+            c.name,
+            c.address,
+            c.email,
+            c.password
+        FROM Customer c
+        WHERE c.id = ?
         """, ( id, ))
 
         # Load the single result into memory

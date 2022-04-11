@@ -1,10 +1,12 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from views.animal_requests import get_all_animals, get_single_animal
+from views.animal_requests import get_animals_by_location, get_animals_by_status
 from views.animal_requests import create_animal, delete_animal, update_animal
 from views.location_requests import get_all_locations, get_single_location
 from views.location_requests import create_location, delete_location, update_location
 from views.employee_requests import get_all_employees, get_single_employee
+from views.employee_requests import get_employees_by_location
 from views.employee_requests import create_employee, delete_employee, update_employee
 from views.customer_requests import get_all_customers, get_single_customer
 from views.customer_requests import create_customer, delete_customer, update_customer
@@ -105,6 +107,17 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_customer(id)}"
                 else:
                     response = f"{get_all_customers()}"
+            elif resource == "employees":
+                if id is not None:
+                    response = f"{get_single_employee(id)}"
+                else:
+                    response = f"{get_all_employees()}"
+            elif resource == "locations":
+                if id is not None:
+                    response = f"{get_single_location(id)}"
+                else:
+                    response = f"{get_all_locations()}"
+
 
         # Response from parse_url() is a tuple with 3
         # items in it, which means the request was for
@@ -117,8 +130,26 @@ class HandleRequests(BaseHTTPRequestHandler):
             # email as a filtering value?
             if key == "email" and resource == "customers":
                 response = get_customers_by_email(value)
-
+            elif key == "location_id" and resource == "animals":
+                response = get_animals_by_location(value)                  
+            elif key == "location_id" and resource == "employees":
+                response = get_employees_by_location(value)                
+            elif key == "status" and resource == "animals":
+                response = get_animals_by_status(value)
+                
         self.wfile.write(response.encode())
+
+
+
+
+
+
+
+
+
+
+
+
 
     # Method on the class that overrides the parent's method.
     # It handles any POST request.
