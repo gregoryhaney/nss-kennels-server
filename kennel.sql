@@ -155,3 +155,5 @@ ON Animal.location_id = Location.id
         FROM Employee AS e
         JOIN Location as l
         ON e.location_id = l.id
+
+        SELECT * FROM Animal ORDER BY id DESC;
