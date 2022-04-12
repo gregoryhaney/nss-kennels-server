@@ -68,3 +68,90 @@ SELECT
 FROM animal a
 WHERE a.id = 5
 
+INSERT INTO `Animal` VALUES (null, "Daps", "Kennel", "Boxer", 2, 2);
+
+DELETE FROM Animal WHERE id = 7;
+
+SELECT a.name, a.location_id, l.id, l.address FROM Animal AS a LEFT JOIN Location AS l ON a.location_id = l.id
+
+
+
+SELECT
+    a.id,
+    a.name,
+    a.breed,
+    a.status,
+    a.location_id,
+    a.customer_id,
+    l.name location_name,
+    l.address location_address
+FROM Animal a
+JOIN Location l
+    ON l.id = a.location_id
+
+
+    SELECT *        
+    FROM (SELECT * 
+            FROM Animal 
+            JOIN Customer 
+            ON Animal.customer_id = Customer.id) AS z
+    JOIN Location AS l
+    ON l.id = a.location_id
+
+
+    SELECT
+        *
+    FROM Animal    
+    JOIN Customer
+    ON Animal.customer_id = Customer.id
+
+SELECT 
+    Location.id, 
+    Location.address, 
+    Location.name
+FROM
+(SELECT
+    Animal.name,
+    Animal.status,
+    Animal.breed,
+    Animal.customer_id,
+    Animal.location_id,
+    Customer.id,
+    Customer.name
+FROM Animal    
+JOIN Customer
+ON Animal.customer_id = Customer.id)
+JOIN Location
+ON Animal.location_id = Location.id
+
+   
+
+
+
+        SELECT
+            a.id,
+            a.name,
+            a.breed,
+            a.status,
+            a.location_id,
+            a.customer_id,
+            l.name location_name,
+            l.address location_address,
+            c.name customer_name
+        FROM Animal AS a
+        JOIN Location AS l
+        ON l.id = a.location_id
+        JOIN Customer AS c
+        ON c.id = a.customer_id
+
+
+        SELECT
+            e.id,
+            e.name,
+            e.address,
+            e.location_id,
+            l.name location_name,
+            l.address location_address
+        FROM Employee AS e
+        JOIN Location as l
+        ON e.location_id = l.id
